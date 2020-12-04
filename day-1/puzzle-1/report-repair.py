@@ -2,7 +2,7 @@ from itertools import combinations
 from math import prod
 
 
-with open('report.csv') as file:
+with open("report.csv") as file:
     REPORT = (int(line) for line in file.readlines())
 
 
