@@ -2,10 +2,48 @@ import pytest
 
 
 @pytest.fixture()
-def report_fixture():
-    return [1, 2, 3, 4, 5, 2000, 6, 20, 7, 8, 9], 2000 * 20
+def report_fixture_pt1():
+    return [
+        1721,
+        979,
+        366,
+        299,
+        675,
+        1456,
+    ], 514579
 
 
 @pytest.fixture()
-def report_fixture_no_solution():
-    return [1, 2, 3, 4, 5, 2000, 6, 21, 7, 8, 9]
+def report_fixture_pt1_no_solution():
+    return [
+        1722,
+        979,
+        366,
+        299,
+        675,
+        1456,
+    ]
+
+
+@pytest.fixture()
+def report_fixture_pt2():
+    return [
+        1721,
+        979,
+        366,
+        299,
+        675,
+        1456,
+    ], 241861950
+
+
+@pytest.fixture()
+def report_fixture_pt2_no_solution():
+    return [
+        1722,
+        979,
+        366,
+        299,
+        676,
+        1456,
+    ]

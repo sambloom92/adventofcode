@@ -12,13 +12,9 @@ def get_report(filename: str = "report.csv") -> Iterable[int]:
         return (int(line) for line in file.readlines())
 
 
-def main() -> int:
-    for pair in combinations(get_report(), 2):
-        if sum(pair) == 2020:
-            return prod(pair)
+def solver(n: int) -> int:
+    for nums in combinations(get_report(), n):
+        if sum(nums) == 2020:
+            return prod(nums)
     else:
         raise SolutionNotFoundError("Could not find a solution for the given data")
-
-
-if __name__ == "__main__":
-    print(main())
