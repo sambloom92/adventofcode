@@ -1,14 +1,19 @@
+import os
 import re
 from typing import Callable, Iterable, Tuple
 
+from conf import ROOT_DIR
 
-def get_data(filename: str = "password_policy.csv") -> Iterable[str]:
+DATA_PATH = os.path.join(ROOT_DIR, "day_2/password_policy.csv")
+
+
+def get_data(filepath: str = DATA_PATH) -> Iterable[str]:
     """
     read the file containing the exercise challenge data and return an iterable of the contents as strings
-    :param filename: relative path
+    :param filepath: path to file
     :return: generator expression yielding strings
     """
-    with open(filename) as file:
+    with open(filepath) as file:
         return (line for line in file.readlines())
 
 
@@ -34,7 +39,7 @@ def parse_line(line: str) -> Tuple[int, int, str, str]:
         raise UnexpectedLineFormat
 
 
-def solver(validating_function: Callable[[str], bool]):
+def solver(validating_function: Callable[[str], bool]) -> int:
     """
     count how many lines have valid passwords
     :param validating_function: callable which checks whether a row is valid

@@ -1,7 +1,7 @@
 from day_2.utils import parse_line, solver
 
 
-def is_valid_password(line) -> bool:
+def is_valid_password(line: str) -> bool:
     """
     check if a particular line contains a valid password
     :param line: line of text containing password and policy

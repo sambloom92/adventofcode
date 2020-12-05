@@ -1,19 +1,25 @@
+import os
 from itertools import combinations
 from math import prod
 from typing import Iterable
+
+from conf import ROOT_DIR
 
 
 class SolutionNotFoundError(Exception):
     pass
 
 
-def get_report(filename: str = "report.csv") -> Iterable[int]:
+REPORT_PATH = os.path.join(ROOT_DIR, "day_1/report.csv")
+
+
+def get_report(filepath: str = REPORT_PATH) -> Iterable[int]:
     """
     read the file containing the exercise challenge data and return an iterable of the contents as integers
-    :param filename: relative path
+    :param filepath: path to file
     :return: generator expression yielding integers
     """
-    with open(filename) as file:
+    with open(filepath) as file:
         return (int(line) for line in file.readlines())
 
 
