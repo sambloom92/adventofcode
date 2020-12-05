@@ -1,4 +1,11 @@
+import os
+
+import pytest
+
+from conf import ROOT_DIR
 from day_3.utils import TobogganMapRow, get_map, multiply_trees_hit, step_through_map
+
+EXAMPLE_MAP_1_PATH = os.path.join(ROOT_DIR, "tests/day_3/example_map_1.csv")
 
 
 def test_get_map():
@@ -8,16 +15,26 @@ def test_get_map():
         TobogganMapRow(".#....#"),
         TobogganMapRow("..#.#.."),
     ]
-    assert get_map("example_map_1.csv") == expected
+    assert get_map(EXAMPLE_MAP_1_PATH) == expected
 
 
-def test_step_through_map():
-    assert step_through_map(1, 1, get_map("example_map_2.csv")) == 2
-    assert step_through_map(1, 3, get_map("example_map_2.csv")) == 7
-    assert step_through_map(1, 5, get_map("example_map_2.csv")) == 3
-    assert step_through_map(1, 7, get_map("example_map_2.csv")) == 4
-    assert step_through_map(2, 1, get_map("example_map_2.csv")) == 2
+EXAMPLE_MAP_2_PATH = os.path.join(ROOT_DIR, "tests/day_3/example_map_2.csv")
+MAP = get_map(EXAMPLE_MAP_2_PATH)
+
+
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+        ("step_through_map(1, 1, MAP)", 2),
+        ("step_through_map(1, 3, MAP)", 7),
+        ("step_through_map(1, 5, MAP)", 3),
+        ("step_through_map(1, 7, MAP)", 4),
+        ("step_through_map(2, 1, MAP)", 2),
+    ],
+)
+def test_step_through_map(test_input, expected):
+    assert eval(test_input) == expected
 
 
 def test_multiply_trees_hit():
-    assert multiply_trees_hit(get_map("example_map_2.csv")) == 336
+    assert multiply_trees_hit(MAP) == 336
