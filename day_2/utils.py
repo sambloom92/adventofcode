@@ -34,7 +34,7 @@ def parse_line(line: str) -> Tuple[int, int, str, str]:
         raise UnexpectedLineFormat
 
 
-def solver(validating_function: Callable[[str], bool]):
+def solver(validating_function: Callable[[str], bool]) -> int:
     """
     count how many lines have valid passwords
     :param validating_function: callable which checks whether a row is valid
