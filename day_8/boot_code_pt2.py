@@ -24,8 +24,7 @@ def fix_code(code_original):
             )
             boot_code = BootCode(code_modified)
             boot_code.run()
-            terminated = boot_code.terminated
-            if terminated:
+            if boot_code.terminated:
                 return boot_code.accumulator
     raise CodeFixFailed
 
