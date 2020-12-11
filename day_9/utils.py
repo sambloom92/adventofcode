@@ -14,7 +14,7 @@ def get_numbers(filepath: str = CYPHER_PATH) -> List[int]:
     """
     read the file containing the exercise challenge data and return an iterable of the contents
     :param filepath: path to file
-    :return: generator expression yielding lines of the cypher file
+    :return: list of lines of the cypher file
     """
     with open(filepath) as file:
         return [int(line.strip()) for line in file.readlines()]

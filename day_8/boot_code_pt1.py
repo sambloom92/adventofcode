@@ -15,5 +15,4 @@ def get_accumulator(code: List[str]):
 
 
 if __name__ == "__main__":
-    code = get_boot_code()
-    print(get_accumulator(code))
+    print(get_accumulator(get_boot_code()))
