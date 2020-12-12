@@ -3,7 +3,7 @@ import os
 from typing import List, Tuple
 
 from conf import ROOT_DIR
-from day_11.utils import count_occupied_seats, get_seats
+from day_11.utils import count_occupied_seats, get_seats, get_stable_arrangement
 
 SEATS_PATH = os.path.join(ROOT_DIR, "day_11/seats.csv")
 
@@ -11,6 +11,12 @@ SEATS_PATH = os.path.join(ROOT_DIR, "day_11/seats.csv")
 def get_immediate_neighbours(
     seats: List[List[str]], coordinates: Tuple[int, int]
 ) -> List[str]:
+    """
+    list the contents of the seats immediately next to the given coordinates
+    :param seats: the seating arrangement
+    :param coordinates: coordinates of the seat of interest
+    :return: the contents of each neigbouring seat given it is not floor and is a valid coordinate
+    """
     row_num, column_num = coordinates
     max_row = len(seats) - 1
     max_column = len(seats[0]) - 1
@@ -41,6 +47,13 @@ def get_immediate_neighbours(
 
 
 def apply_rules(seats: List[List[str]]) -> List[List[str]]:
+    """
+    apply the rules provided in the instructions simultaneously to populate/empty each seats.
+    any seat neighbouring 4 or more populated seat will become empty.
+    any empty seat with no populated neighbours will become populated.
+    :param seats: the seating arrangement
+    :return: the seating arrangement after the rules are applied once
+    """
     new_seats = copy.deepcopy(seats)
     for row_num, row in enumerate(seats):
         for column_num, value in enumerate(row):
@@ -56,14 +69,7 @@ def apply_rules(seats: List[List[str]]) -> List[List[str]]:
     return new_seats
 
 
-def get_stable_arrangement(seats: List[List[str]]) -> List[List[str]]:
-    current_arrangement = copy.deepcopy(seats)
-    new_arrangement = apply_rules(current_arrangement)
-    if current_arrangement == new_arrangement:
-        return new_arrangement
-    else:
-        return get_stable_arrangement(new_arrangement)
-
-
 if __name__ == "__main__":
-    print(count_occupied_seats(get_stable_arrangement(get_seats(SEATS_PATH))))
+    print(
+        count_occupied_seats(get_stable_arrangement(get_seats(SEATS_PATH), apply_rules))
+    )

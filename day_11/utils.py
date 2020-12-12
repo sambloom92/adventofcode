@@ -1,5 +1,6 @@
+import copy
 import os
-from typing import List
+from typing import Callable, List
 
 from conf import ROOT_DIR
 
@@ -17,4 +18,25 @@ def get_seats(filepath: str = SEATS_PATH) -> List[List[str]]:
 
 
 def count_occupied_seats(seats: List[List[str]]) -> int:
+    """
+    count how many seats are occupied for a given arrangement
+    :param seats: list of lists of values
+    :return: how many '#'s are present
+    """
     return len([value for row in seats for value in row if value == "#"])
+
+
+def get_stable_arrangement(
+    seats: List[List[str]], rule_func: Callable
+) -> List[List[str]]:
+    """
+    apply the rules repeatedly until a stable arrangement arises
+    :param seats: the seating arrangement
+    :return: a seating arrangement which does not change if rules are applied again
+    """
+    current_arrangement = copy.deepcopy(seats)
+    new_arrangement = rule_func(current_arrangement)
+    if current_arrangement == new_arrangement:
+        return new_arrangement
+    else:
+        return get_stable_arrangement(new_arrangement, rule_func)
